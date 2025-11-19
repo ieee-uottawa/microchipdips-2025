@@ -3,6 +3,14 @@
 #ifndef IEEE_GPIO
 #define IEEE_GPIO
 
+typedef struct
+{
+  int pin;
+  volatile uint8_t * PORT;
+  volatile uint8_t * DDR;
+  volatile uint8_t * PIN;
+} Pin_t;
+
 
 typedef enum
 {
@@ -16,24 +24,24 @@ typedef enum
   PIN_HIGH = 1
 } PinState_t;
 
-void GPIO_PinMode(volatile uint8_t *DDR, uint8_t pin, PinMode_t mode)
+void GPIO_PinMode(Pin_t pin, PinMode_t mode)
 {
-  *DDR = ( *DDR & ~(0b1 << pin)) | (mode << pin);
+  *(pin.DDR) = (*(pin.DDR) & ~(0b1 << pin.pin)) | (mode << pin.pin);
 }
 
-void GPIO_Write(volatile uint8_t *PORT, uint8_t pin, PinState_t state)
+void GPIO_Write(Pin_t pin, PinState_t state)
 {
-  *PORT = (*PORT & ~(0b1 << pin)) | (state << pin);
+  *(pin.PORT) = (*(pin.PORT) & ~(0b1 << pin.pin)) | (state << pin.pin);
 }
 
-void GPIO_Toggle(volatile uint8_t *PORT, uint8_t pin)
+void GPIO_Toggle(Pin_t pin)
 {
-  *PORT = *PORT ^ (0b1 << pin);
+  *(pin.PORT) = *(pin.PORT) ^ (0b1 << pin.pin);
 }
 
-PinState_t GPIO_Read(volatile uint8_t *PIN, uint8_t pin)
+PinState_t GPIO_Read(Pin_t pin)
 {
-  return (PinState_t)((*PIN >> pin) & 0b1);
+  return (PinState_t)((*(pin.PIN)>> pin.pin) & 0b1);
 }
 
 #endif
