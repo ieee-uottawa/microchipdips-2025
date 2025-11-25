@@ -34,6 +34,11 @@ void GPIO_Write(Pin_t pin, PinState_t state)
   *(pin.PORT) = (*(pin.PORT) & ~(0b1 << pin.pin)) | (state << pin.pin);
 }
 
+void GPIO_PortWrite(Pin_t pin, uint8_t states)
+{
+  *(pin.PORT) = states;
+}
+
 void GPIO_Toggle(Pin_t pin)
 {
   *(pin.PORT) = *(pin.PORT) ^ (0b1 << pin.pin);

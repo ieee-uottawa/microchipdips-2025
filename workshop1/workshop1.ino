@@ -1,11 +1,8 @@
 #include <stdint.h>
 #include "gpio.h"
 
-#define RED_PERIOD 500
+#define RED_PERIOD 20
 #define GREEN_PERIOD 1000
-
-// int led_r = 7;
-// int led_g = 5;
 
 Pin_t led_r = {7, &PORTD, &DDRD, &PIND};
 Pin_t led_g = {5, &PORTD, &DDRD, &PIND};
