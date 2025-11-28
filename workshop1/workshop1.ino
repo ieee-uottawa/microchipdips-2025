@@ -4,8 +4,8 @@
 #define RED_PERIOD 20
 #define GREEN_PERIOD 1000
 
-Pin_t led_r = { 7, &PORTD, &DDRD, &PIND };
-Pin_t led_g = { 5, &PORTD, &DDRD, &PIND };
+Pin_t led_r = {2, &PORTD, &DDRD, &PIND };
+Pin_t led_g = {3, &PORTD, &DDRD, &PIND };
 
 
 typedef long long int time_t;
